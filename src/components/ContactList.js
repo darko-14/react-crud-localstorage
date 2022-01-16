@@ -3,51 +3,46 @@ import AddContactForm from './AddContactForm'
 import { useState } from 'react'
 import '../App.css'
 
-const ContactList = () => {
-    const [contacts, setContacts] = useState(getContacts())
-
-    function getContacts(){
-        if(localStorage.getItem("ContactList") == null){
-            localStorage.setItem("ContactList", JSON.stringify([]))
-        }
-        return JSON.parse(localStorage.getItem("ContactList"));
-    }
-
-    const onAddOrEdit = data => {
-        var list = getContacts();
-        list.push(data);
-        localStorage.setItem("ContactList", JSON.stringify(list));
-        setContacts({list});
-    }
-
+const ContactList = (props) => {
+    
     return (
+        
         <div>
-            <AddContactForm onAddOrEdit={onAddOrEdit} />
+            <AddContactForm addContact={props.addContact} />
             <hr />
-            <h2>List of contacts</h2>
-            <br />
-            <table>
-                <thead>
-                    <td>#</td>
-                    <td>Name</td>
-                    <td>Phone</td>
-                </thead>
-                <hr/>
-                <tbody>
-                    {
-                        contacts.map((item, index)=>{
-                            return <tr>
-                                <td>{index+1}</td>
-                                <td>{item.name}</td>
-                                <td>{item.phone}</td>
-                                <td>Edit</td>
-                                <td>Delete</td>
-                            </tr>
-                        })
-                    }
-                </tbody>
-            </table>
+            
+            {props.contacts.length === 0 ? (<h1>No Contacts in the list.</h1>) :
+            (<div> 
+                <h2>List of contacts {props.contacts.length}</h2>
+                <br />
+                <table>
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Name</td>
+                            <td>Phone</td>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+
+                        
+                        {    
+                            Array.from(props.contacts).map((item, index)=>{
+                                return <tr key={index}>
+                                    <td>{index+1}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.phone}</td>
+                                    <td><button onClick={() => props.editContact(index)}>Edit</button></td>
+                                    <td><button onClick={() => props.deleteContact(index)}>Delete</button></td>
+                                </tr>
+                            }) 
+                        }
+                    </tbody>
+                </table>
+            </div>)
+            }   
+                                
         </div>
     )
 }
