@@ -1,6 +1,6 @@
 import ContactList from './components/ContactList'
 import './App.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [contacts, setContacts] = useState(getContacts())
@@ -23,11 +23,17 @@ function App() {
     list.splice(id, 1);
     setContacts({list});
     localStorage.setItem("ContactList", JSON.stringify(list));
-    
+    window.location.reload();
   }
 
-  const editContact = (id) => {
-    console.log("Edited contact: " + id+1);
+  const editContact = (index) => {
+    const name = prompt("Enter a name");
+    const phone = prompt("Enter a phone");
+    var list = getContacts();
+    list[index] = {name: name, phone: phone}
+    setContacts({list});
+    localStorage.setItem("ContactList", JSON.stringify(list));
+    window.location.reload();
   }
 
   return (

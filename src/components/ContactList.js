@@ -1,16 +1,13 @@
 import React from 'react'
 import AddContactForm from './AddContactForm'
-import { useState } from 'react'
 import '../App.css'
 
 const ContactList = (props) => {
     
     return (
-        
         <div>
             <AddContactForm addContact={props.addContact} />
             <hr />
-            
             {props.contacts.length === 0 ? (<h1>No Contacts in the list.</h1>) :
             (<div> 
                 <h2>List of contacts {props.contacts.length}</h2>
@@ -24,9 +21,6 @@ const ContactList = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-
-
-                        
                         {    
                             Array.from(props.contacts).map((item, index)=>{
                                 return <tr key={index}>
@@ -41,8 +35,7 @@ const ContactList = (props) => {
                     </tbody>
                 </table>
             </div>)
-            }   
-                                
+            }                                   
         </div>
     )
 }
