@@ -1,6 +1,6 @@
 import ContactList from './components/ContactList'
 import './App.css';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function App() {
   const [contacts, setContacts] = useState(getContacts())
@@ -26,9 +26,9 @@ function App() {
     window.location.reload();
   }
 
-  const editContact = (index) => {
-    const name = prompt("Enter a name");
-    const phone = prompt("Enter a phone");
+  const editContact = index => {
+    var name = prompt("Enter a name");
+    var phone = prompt("Enter a phone");
     var list = getContacts();
     list[index] = {name: name, phone: phone}
     setContacts({list});
@@ -43,7 +43,7 @@ function App() {
         addContact={addContact}
         deleteContact={deleteContact}
         editContact={editContact}  
-        />
+      />
     </div>
   );
 }

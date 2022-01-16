@@ -10,7 +10,7 @@ const ContactList = (props) => {
             <hr />
             {props.contacts.length === 0 ? (<h1>No Contacts in the list.</h1>) :
             (<div> 
-                <h2>List of contacts {props.contacts.length}</h2>
+                <h2>{props.contacts.length} contacts in the list</h2>
                 <br />
                 <table>
                     <thead>
